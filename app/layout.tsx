@@ -1,22 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Pacifico } from "next/font/google";
+// 修正 1: 从 'geist' 包中导入字体，而不是 'next/font/google'
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import "./globals.css";
+
+// 你原来的 Pacifico 字体可以保留，因为它确实是 Google Font
+import { Pacifico } from "next/font/google";
 
 const pacifico = Pacifico({
   weight: '400',
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-pacifico',
-})
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -31,8 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
+      {/* 修正 2: 使用 GeistSans.variable 和 GeistMono.variable */}
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${pacifico.variable} antialiased`}
+        className={`${GeistSans.variable} ${GeistMono.variable} ${pacifico.variable} antialiased`}
       >
         {children}
       </body>
